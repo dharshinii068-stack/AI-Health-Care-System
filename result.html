@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Health Analysis Result</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%,#d9f8ff,transparent 30%),
+        radial-gradient(circle at 90% 20%,#eadcff,transparent 30%),
+        radial-gradient(circle at 50% 100%,#dfffe9,transparent 30%),
+        linear-gradient(135deg,#f7fbff,#eef4ff);
+    color:#24344d;
+    padding-bottom:50px;
+}
+
+/* HEADER */
+
+.header{
+    width:100%;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(15px);
+    box-shadow:0 5px 25px rgba(30,60,100,.1);
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:22px;
+    font-weight:800;
+    color:#315efb;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:23px;
+    background:linear-gradient(135deg,#315efb,#8b35d6);
+    box-shadow:0 8px 20px rgba(49,94,251,.25);
+}
+
+.home-btn{
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    padding:11px 20px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#315efb,#8b35d6);
+    transition:.3s;
+}
+
+.home-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* HERO */
+
+.hero{
+    width:90%;
+    max-width:1150px;
+    margin:40px auto 25px;
+    padding:50px 25px;
+    border-radius:32px;
+    text-align:center;
+    color:white;
+    background:
+        linear-gradient(135deg,
+        rgba(49,94,251,.97),
+        rgba(139,53,214,.97));
+    box-shadow:0 25px 55px rgba(65,70,180,.22);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:before,
+.hero:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+}
+
+.hero:before{
+    width:250px;
+    height:250px;
+    left:-100px;
+    top:-130px;
+}
+
+.hero:after{
+    width:300px;
+    height:300px;
+    right:-120px;
+    bottom:-160px;
+}
+
+.hero-icon{
+    width:75px;
+    height:75px;
+    margin:auto auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    background:rgba(255,255,255,.18);
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:38px;
+    margin-bottom:10px;
+    position:relative;
+    z-index:2;
+}
+
+.hero p{
+    font-size:17px;
+    opacity:.92;
+    position:relative;
+    z-index:2;
+}
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+}
+
+/* PERSONAL SUMMARY */
+
+.section-title{
+    text-align:center;
+    margin:38px 0 20px;
+}
+
+.section-title h2{
+    font-size:28px;
+    color:#263b5b;
+}
+
+.section-title p{
+    color:#74839a;
+    margin-top:7px;
+}
+
+/* INFO GRID */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:rgba(255,255,255,.9);
+    border-radius:22px;
+    padding:23px;
+    box-shadow:0 10px 30px rgba(35,65,100,.08);
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 17px 35px rgba(35,65,100,.13);
+}
+
+.info-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.info-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    background:#eef4ff;
+}
+
+.info-card h3{
+    font-size:14px;
+    color:#75849a;
+}
+
+.info-value{
+    font-size:24px;
+    font-weight:800;
+    color:#263b5b;
+}
+
+/* BMI */
+
+.bmi-section{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.bmi-card{
+    padding:30px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#ffffff,#f1f6ff);
+    box-shadow:0 12px 35px rgba(35,65,100,.09);
+}
+
+.bmi-number{
+    font-size:52px;
+    font-weight:900;
+    background:linear-gradient(135deg,#315efb,#8b35d6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.bmi-status{
+    display:inline-block;
+    margin-top:8px;
+    padding:8px 18px;
+    border-radius:20px;
+    background:#e8fff4;
+    color:#15966b;
+    font-weight:800;
+}
+
+.bmi-scale{
+    margin-top:25px;
+}
+
+.scale-line{
+    width:100%;
+    height:14px;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        #38bdf8 0%,
+        #36c98f 35%,
+        #fbbf24 65%,
+        #ef4444 100%
+    );
+}
+
+.scale-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#7b8798;
+    margin-top:7px;
+}
+
+.bmi-note{
+    color:#718096;
+    line-height:1.6;
+    margin-top:15px;
+}
+
+/* SYMPTOMS */
+
+.symptoms-box{
+    padding:25px;
+    border-radius:24px;
+    background:rgba(255,255,255,.9);
+    box-shadow:0 10px 30px rgba(35,65,100,.08);
+}
+
+.symptom-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.symptom{
+    padding:10px 17px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#eef4ff,#f7edff);
+    color:#4b50a5;
+    font-weight:700;
+    font-size:14px;
+}
+
+.no-symptom{
+    color:#718096;
+    padding:10px;
+}
+
+/* RECOMMENDATIONS */
+
+.results{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.result-card{
+    background:rgba(255,255,255,.94);
+    border-radius:22px;
+    padding:22px 25px;
+    display:flex;
+    gap:17px;
+    align-items:flex-start;
+    border-left:6px solid #36c98f;
+    box-shadow:0 9px 28px rgba(30,70,100,.08);
+    transition:.3s;
+    animation:appear .5s ease forwards;
+}
+
+.result-card:hover{
+    transform:translateX(7px);
+    box-shadow:0 15px 35px rgba(30,70,100,.13);
+}
+
+.result-card:nth-child(2){
+    border-left-color:#38bdf8;
+}
+
+.result-card:nth-child(3){
+    border-left-color:#a855f7;
+}
+
+.result-card:nth-child(4){
+    border-left-color:#f59e0b;
+}
+
+.result-card:nth-child(5){
+    border-left-color:#ec4899;
+}
+
+.result-card:nth-child(6){
+    border-left-color:#14b8a6;
+}
+
+.check{
+    min-width:45px;
+    height:45px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:21px;
+    background:linear-gradient(135deg,#36c98f,#13b97a);
+}
+
+.result-text{
+    line-height:1.7;
+    color:#48576c;
+    font-size:16px;
+}
+
+/* LIFESTYLE */
+
+.lifestyle{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.life-card{
+    padding:23px;
+    border-radius:22px;
+    background:white;
+    box-shadow:0 9px 27px rgba(30,70,100,.07);
+    transition:.3s;
+}
+
+.life-card:hover{
+    transform:translateY(-5px);
+}
+
+.life-card h3{
+    color:#334e68;
+    margin-bottom:8px;
+}
+
+.life-card p{
+    color:#718096;
+    line-height:1.6;
+}
+
+/* WELLNESS TIPS */
+
+.tips{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.tip{
+    padding:23px;
+    min-height:180px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#ffffff,#f5f8ff);
+    box-shadow:0 9px 25px rgba(30,70,100,.07);
+    transition:.3s;
+}
+
+.tip:hover{
+    transform:translateY(-7px);
+}
+
+.tip-icon{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.tip h3{
+    color:#334e68;
+    margin-bottom:8px;
+}
+
+.tip p{
+    color:#718096;
+    line-height:1.55;
+    font-size:14px;
+}
+
+/* BUTTON */
+
+.button-area{
+    text-align:center;
+    margin-top:42px;
+}
+
+.back-btn{
+    display:inline-block;
+    padding:15px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    font-weight:800;
+    background:linear-gradient(135deg,#315efb,#8b35d6);
+    box-shadow:0 10px 25px rgba(49,94,251,.25);
+    transition:.3s;
+}
+
+.back-btn:hover{
+    transform:translateY(-4px) scale(1.02);
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    margin-top:55px;
+    padding:25px;
+    color:#718096;
+    font-size:14px;
+}
+
+footer span{
+    color:#315efb;
+    font-weight:800;
+}
+
+/* ANIMATION */
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .bmi-section{
+        grid-template-columns:1fr;
+    }
+
+    .lifestyle{
+        grid-template-columns:1fr;
+    }
+
+    .tips{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:29px;
+    }
+}
+
+@media(max-width:550px){
+
+    .header{
+        padding:15px 4%;
+    }
+
+    .logo{
+        font-size:17px;
+    }
+
+    .logo-icon{
+        width:38px;
+        height:38px;
+    }
+
+    .home-btn{
+        padding:9px 13px;
+        font-size:13px;
+    }
+
+    .hero{
+        width:94%;
+        padding:38px 18px;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .tips{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        <div class="logo-icon">❤</div>
+        AI Health Care
+    </div>
+
+    <a href="/ourhealth" class="home-btn">
+        ← Analyze Again
+    </a>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-icon">✓</div>
+
+    <h1>Your Health Analysis is Ready!</h1>
+
+    <p>
+        Your personalized preventive healthcare report has been generated
+    </p>
+
+</section>
+
+
+<div class="container">
+
+
+<!-- HEALTH OVERVIEW -->
+
+<div class="section-title">
+
+    <h2>📊 Health Overview</h2>
+
+    <p>Your current health assessment details</p>
+
+</div>
+
+
+<div class="info-grid">
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">💧</div>
+            <h3>Water Intake</h3>
+        </div>
+
+        <div class="info-value">
+            {{ water }} L
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">😴</div>
+            <h3>Sleep</h3>
+        </div>
+
+        <div class="info-value">
+            {{ sleep }} Hours
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">🏃</div>
+            <h3>Exercise</h3>
+        </div>
+
+        <div class="info-value">
+            {{ exercise }} Min
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">🥗</div>
+            <h3>Food Habit</h3>
+        </div>
+
+        <div class="info-value">
+            {{ food_habit|capitalize }}
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">🧘</div>
+            <h3>Stress Level</h3>
+        </div>
+
+        <div class="info-value">
+            {{ stress_level|capitalize }}
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-top">
+            <div class="info-icon">🤖</div>
+            <h3>Analysis</h3>
+        </div>
+
+        <div class="info-value">
+            AI Based
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BMI -->
+
+<div class="section-title">
+
+    <h2>⚖️ BMI Analysis</h2>
+
+    <p>Body Mass Index based on your height and weight</p>
+
+</div>
+
+
+<div class="bmi-section">
+
+    <div class="bmi-card">
+
+        <div class="bmi-number">
+            {{ bmi }}
+        </div>
+
+        <div class="bmi-status">
+            {{ bmi_status }}
+        </div>
+
+        <div class="bmi-scale">
+
+            <div class="scale-line"></div>
+
+            <div class="scale-labels">
+                <span>Underweight</span>
+                <span>Normal</span>
+                <span>Overweight</span>
+                <span>Obese</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="bmi-card">
+
+        <h2>💡 What does this mean?</h2>
+
+        <p class="bmi-note">
+
+            {% if bmi_status == "Underweight" %}
+
+            Your BMI is below the normal range. Focus on nutritious
+            meals, adequate protein and healthy calorie intake.
+
+            {% elif bmi_status == "Normal" %}
+
+            Your BMI is within the normal range. Continue maintaining
+            balanced nutrition, regular physical activity and healthy habits.
+
+            {% elif bmi_status == "Overweight" %}
+
+            Your BMI is above the normal range. Focus on balanced meals,
+            portion control and regular physical activity.
+
+            {% else %}
+
+            Your BMI is in the obesity range. Gradual lifestyle changes
+            and professional healthcare guidance may be helpful.
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- SYMPTOMS -->
+
+<div class="section-title">
+
+    <h2>🔎 Selected Symptoms</h2>
+
+    <p>Symptoms included in your health assessment</p>
+
+</div>
+
+
+<div class="symptoms-box">
+
+    <div class="symptom-list">
+
+        {% if symptoms %}
+
+            {% for symptom in symptoms %}
+
+                <div class="symptom">
+                    ✓ {{ symptom|replace("_"," ")|title }}
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="no-symptom">
+                ✅ No symptoms were selected
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- RECOMMENDATIONS -->
+
+<div class="section-title">
+
+    <h2>🤖 AI Health Recommendations</h2>
+
+    <p>Personalized preventive recommendations based on your assessment</p>
+
+</div>
+
+
+<div class="results">
+
+    {% if recommendations %}
+
+        {% for recommendation in recommendations %}
+
+            <div class="result-card">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <div class="result-text">
+                    {{ recommendation }}
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="result-card">
+
+            <div class="check">✓</div>
+
+            <div class="result-text">
+                No specific recommendations were generated.
+                Continue maintaining healthy preventive habits.
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- LIFESTYLE SUMMARY -->
+
+<div class="section-title">
+
+    <h2>🌱 Lifestyle Summary</h2>
+
+    <p>A quick view of the habits you reported</p>
+
+</div>
+
+
+<div class="lifestyle">
+
+    <div class="life-card">
+
+        <h3>💧 Hydration</h3>
+
+        <p>
+            You reported drinking <strong>{{ water }} litres</strong>
+            of water per day.
+        </p>
+
+    </div>
+
+
+    <div class="life-card">
+
+        <h3>😴 Sleep Routine</h3>
+
+        <p>
+            You reported approximately <strong>{{ sleep }} hours</strong>
+            of sleep per day.
+        </p>
+
+    </div>
+
+
+    <div class="life-card">
+
+        <h3>🏃 Physical Activity</h3>
+
+        <p>
+            You reported approximately <strong>{{ exercise }} minutes</strong>
+            of exercise per day.
+        </p>
+
+    </div>
+
+
+    <div class="life-card">
+
+        <h3>🧘 Stress Management</h3>
+
+        <p>
+            Your reported stress level is
+            <strong>{{ stress_level|capitalize }}</strong>.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- WELLNESS TIPS -->
+
+<div class="section-title">
+
+    <h2>🌟 Daily Wellness Tips</h2>
+
+    <p>Small healthy habits can make a big difference</p>
+
+</div>
+
+
+<div class="tips">
+
+    <div class="tip">
+
+        <div class="tip-icon">💧</div>
+
+        <h3>Stay Hydrated</h3>
+
+        <p>
+            Drink water regularly throughout the day and stay hydrated.
+        </p>
+
+    </div>
+
+
+    <div class="tip">
+
+        <div class="tip-icon">🥗</div>
+
+        <h3>Eat Balanced</h3>
+
+        <p>
+            Include fruits, vegetables, protein and whole grains in meals.
+        </p>
+
+    </div>
+
+
+    <div class="tip">
+
+        <div class="tip-icon">🏃</div>
+
+        <h3>Stay Active</h3>
+
+        <p>
+            Include regular physical activity that is comfortable and safe.
+        </p>
+
+    </div>
+
+
+    <div class="tip">
+
+        <div class="tip-icon">😴</div>
+
+        <h3>Sleep Well</h3>
+
+        <p>
+            Maintain a consistent sleep schedule and get sufficient rest.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- BUTTON -->
+
+<div class="button-area">
+
+    <a href="/ourhealth" class="back-btn">
+        🔄 Check My Health Again
+    </a>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026
+        <span>AI Based Preventive Health Care Recommendation System</span>
+    </p>
+
+    <p>
+        Stay Healthy • Stay Happy • Stay Preventive 💙
+    </p>
+</footer>
+
+
+</body>
+</html>

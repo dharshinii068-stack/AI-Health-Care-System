@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Health History - HealthAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f9ff;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 8%;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #168c79;
+        }
+
+        .logo span {
+            color: #3157d5;
+        }
+
+        .container {
+            width: 1100px;
+            max-width: 92%;
+            margin: 40px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            color: #24304a;
+            font-size: 32px;
+        }
+
+        .heading p {
+            color: #70798c;
+        }
+
+        .history-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #168c79;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5eaf3;
+            color: #39445c;
+        }
+
+        tr:hover {
+            background: #f5f9ff;
+        }
+
+        .status {
+            font-weight: bold;
+            color: #3157d5;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #70798c;
+        }
+
+        .button-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+            margin: 5px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dashboard-btn {
+            background: #3157d5;
+        }
+
+        .assessment-btn {
+            background: #168c79;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            🩺 Health<span>AI</span>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="heading">
+
+            <h1>📊 Health History</h1>
+
+            <p>
+                View your previous health assessments and recommendations.
+            </p>
+
+        </div>
+
+
+        <div class="history-box">
+
+            {% if assessments %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Height</th>
+                        <th>Weight</th>
+                        <th>BMI</th>
+                        <th>BMI Status</th>
+                        <th>Symptoms</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for assessment in assessments %}
+
+                    <tr>
+
+                        <td>
+                            {{ assessment.created_at }}
+                        </td>
+
+                        <td>
+                            {{ assessment.user_age }}
+                        </td>
+
+                        <td>
+                            {{ assessment.gender }}
+                        </td>
+
+                        <td>
+                            {{ assessment.height }} cm
+                        </td>
+
+                        <td>
+                            {{ assessment.weight }} kg
+                        </td>
+
+                        <td>
+                            {{ assessment.bmi }}
+                        </td>
+
+                        <td class="status">
+                            {{ assessment.bmi_status }}
+                        </td>
+
+                        <td>
+                            {{ assessment.symptoms or "No symptoms" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h2>
+                    📋 No Health Assessments Yet
+                </h2>
+
+                <p>
+                    Complete your first health assessment
+                    to see your history here.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="button-area">
+
+            <a href="/dashboard"
+               class="btn dashboard-btn">
+
+                ← Dashboard
+
+            </a>
+
+            <a href="/assessment"
+               class="btn assessment-btn">
+
+                🩺 New Assessment
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

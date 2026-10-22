@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HealthAI - Create Account</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dff9ff,
+                    #e9ddff,
+                    #fff0f6
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .main-container {
+
+            width: 1100px;
+            min-height: 680px;
+
+            display: flex;
+
+            background: rgba(255,255,255,0.92);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.15);
+        }
+
+
+        /* LEFT SIDE */
+
+        .left-section {
+
+            width: 45%;
+
+            padding: 45px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0077b6,
+                    #00b4d8,
+                    #48cae4
+                );
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .logo {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            margin-bottom: 45px;
+        }
+
+
+        .logo span {
+            color: #ffe66d;
+        }
+
+
+        .left-section h1 {
+
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 18px;
+        }
+
+
+        .left-section p {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            opacity: 0.95;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* HEALTH ILLUSTRATION */
+
+        .health-card {
+
+            width: 100%;
+
+            padding: 25px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(10px);
+
+            border:
+                1px solid rgba(255,255,255,0.3);
+        }
+
+
+        .doctor {
+
+            text-align: center;
+
+            font-size: 85px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .health-card h3 {
+
+            text-align: center;
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .health-card p {
+
+            text-align: center;
+
+            font-size: 13px;
+
+            margin: 0;
+        }
+
+
+        /* SMALL HEALTH BOXES */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+
+        .feature-box {
+
+            background:
+                rgba(255,255,255,0.2);
+
+            border-radius: 15px;
+
+            padding: 15px 8px;
+
+            text-align: center;
+
+            font-size: 12px;
+        }
+
+
+        .feature-box .icon {
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+        }
+
+
+        /* DECORATION CIRCLES */
+
+        .circle-one {
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.08);
+
+            right: -70px;
+            top: -60px;
+        }
+
+
+        .circle-two {
+
+            position: absolute;
+
+            width: 140px;
+            height: 140px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.08);
+
+            left: -60px;
+            bottom: -40px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .right-section {
+
+            width: 55%;
+
+            padding: 45px 55px;
+
+            background: white;
+        }
+
+
+        .form-title {
+
+            font-size: 30px;
+
+            color: #222;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-subtitle {
+
+            color: #777;
+
+            margin-bottom: 28px;
+
+            font-size: 14px;
+        }
+
+
+        /* FORM */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #333;
+
+            margin-bottom: 7px;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 2px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.3s;
+
+            background: #fafafa;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #00a8cc;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(0,168,204,0.1);
+        }
+
+
+        /* BUTTON */
+
+        .register-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0077b6,
+                    #00b4d8,
+                    #7b2cbf
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: 0.3s;
+        }
+
+
+        .register-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(0,119,182,0.3);
+        }
+
+
+        /* LOGIN */
+
+        .login-text {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        .login-text a {
+
+            color: #0077b6;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .login-text a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* SECURITY */
+
+        .security {
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            background: #f0fbff;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            color: #555;
+
+            font-size: 12px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .main-container {
+
+                flex-direction: column;
+
+                width: 100%;
+            }
+
+
+            .left-section,
+            .right-section {
+
+                width: 100%;
+            }
+
+
+            .left-section {
+
+                padding: 35px;
+            }
+
+
+            .left-section h1 {
+
+                font-size: 32px;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            body {
+
+                padding: 10px;
+            }
+
+
+            .right-section {
+
+                padding: 30px 20px;
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+
+            .features {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="main-container">
+
+
+    <!-- ================= LEFT SIDE ================= -->
+
+    <div class="left-section">
+
+
+        <div class="circle-one"></div>
+
+        <div class="circle-two"></div>
+
+
+        <div class="logo">
+
+            ❤️ Health<span>AI</span>
+
+        </div>
+
+
+        <h1>
+
+            Start Your
+            <br>
+            Healthy Journey
+
+        </h1>
+
+
+        <p>
+
+            Create your HealthAI account and
+            get personalized preventive health
+            recommendations powered by
+            intelligent analysis.
+
+        </p>
+
+
+        <!-- HEALTH CARD -->
+
+        <div class="health-card">
+
+            <div class="doctor">
+                🧑‍⚕️
+            </div>
+
+
+            <h3>
+                Your Health, Our Priority
+            </h3>
+
+
+            <p>
+                Monitor your health and make
+                better lifestyle decisions.
+            </p>
+
+        </div>
+
+
+        <!-- FEATURES -->
+
+        <div class="features">
+
+
+            <div class="feature-box">
+
+                <div class="icon">
+                    🧠
+                </div>
+
+                AI Analysis
+
+            </div>
+
+
+            <div class="feature-box">
+
+                <div class="icon">
+                    ❤️
+                </div>
+
+                Health Care
+
+            </div>
+
+
+            <div class="feature-box">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                BMI Check
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= RIGHT SIDE ================= -->
+
+    <div class="right-section">
+
+
+        <h2 class="form-title">
+
+            Create Your Account
+
+        </h2>
+
+
+        <p class="form-subtitle">
+
+            Fill in your details to get started
+            with HealthAI.
+
+        </p>
+
+
+        <!-- REGISTER FORM -->
+
+        <form action="/register"
+              method="POST">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+
+                    👤 Full Name
+
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+
+                    🔐 Password
+
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="4"
+                    required
+                >
+
+            </div>
+
+
+            <!-- AGE + GENDER -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="age">
+
+                        🎂 Age
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="Your age"
+                        min="1"
+                        max="120"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="gender">
+
+                        ⚧ Gender
+
+                    </label>
+
+                    <select
+                        id="gender"
+                        name="gender"
+                        required
+                    >
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label for="phone">
+
+                    📱 Phone Number
+
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="register-btn">
+
+                Create My HealthAI Account 🚀
+
+            </button>
+
+
+        </form>
+
+
+        <!-- LOGIN LINK -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login Here
+            </a>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="security">
+
+            🔒 Your information is used only
+            for your preventive health assessment.
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
