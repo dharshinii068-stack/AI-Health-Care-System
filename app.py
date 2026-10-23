@@ -3,7 +3,6 @@ from database import get_db_connection
 from health_ai import analyze_health
 
 # PyWebView
-import webview
 import threading
 import time
 
